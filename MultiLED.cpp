@@ -1,13 +1,12 @@
 /* 
 * MultiLED.cpp
 *
-* Created: 30.11.2020 07:44:14
+* Created: 30.11.2020
 * Author: Kofler Max
 */
 
-
-#include "MultiLED.h"
 #define __MULTILED_CPP__
+#include "MultiLED.h"
 
 
 void MultiLED::addStrips(uint8_t ammount, uint16_t maxLEDCount){
@@ -87,7 +86,7 @@ void MultiLED::prepareSteps(){
 
 void MultiLED::writeToStrip(){
 	//Disable interrupts
-	//cli();
+	cli();
 	volatile uint8_t *reg16 = (volatile uint8_t *)0x10;
 	volatile uint8_t *reg17 = (volatile uint8_t *)0x11;
 	volatile uint8_t *reg18 = (volatile uint8_t *)0x12;
@@ -183,7 +182,7 @@ void MultiLED::writeToStrip(){
 	asm volatile ("nop");
 	
 	//Reenable interrupts
-	//sei();
+	sei();
 
 	//Waiting for reset trigger
 	_delay_us(55);

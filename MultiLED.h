@@ -1,20 +1,28 @@
 /* 
 * MultiLED.h
 *
-* Created: 30.11.2020 07:44:14
+* Created: 30.11.2020
 * Author: Kofler Max
 
 
 --------------------------------------------
 
 Currently supported PORTS:
+	-PORTA
 	-PORTB
+	-PORTC
 	-PORTD
-	
-Warning: currently it is not possible to use multiple instances of this Library! Port usage
-has to be done with "#define MULTILED_PORTx", x = B or D.
+	-PORTE
+	-PORTF
+	-PORTG
+	-PORTH
+	-PORTJ
+	-PORTK
+	-PORTL
 
-
+WARNING:
+	Currently the clockspeed has to be 16 Mhz, due to the assembly instructions being hardcoded,
+	more clockspeeds are in progress.
 */
 
 #define MULTILED_PORTA 0x0022
@@ -32,7 +40,7 @@ has to be done with "#define MULTILED_PORTx", x = B or D.
 #ifdef __MULTILED_CPP__
 
 	#ifndef MULTILED_COMPILER_OK
-		#warning "The steps array can not be detected by the compiler! Size calculation: LEDCount * 3 * 8 (to hide this, type #define MULTILED_COMPILER_OK)"
+		#warning "The steps array can not be detected by the compiler! Size calculation: LEDCount * 3 * 8 (to hide this, type #define MULTILED_COMPILER_OK before the include of this library)"
 	#endif
 
 	#ifndef F_CPU
@@ -47,6 +55,7 @@ has to be done with "#define MULTILED_PORTx", x = B or D.
 
 #include <stdlib.h>
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <util/delay.h>
 
 struct RGB{

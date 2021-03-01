@@ -11,7 +11,7 @@ MultiLED *multiLed;
 
 void setup() 
 {
-  //Initializing PORT B (will later be included into the multiled library!)
+  //Initializing PORT B
   DDRB = 0xFF;
 
   //Initialize the library
@@ -28,14 +28,8 @@ void setup()
     leds[i] = {10, 0, 0};
   }
 
-  //Remove interrupts (will later be included into the library!)
-  noInterrupts();
-
   //Now write the values to the strip
   multiLed->show();
-
-  //reenable interrupts
-  interrupts();
 }
 
 void loop() {
